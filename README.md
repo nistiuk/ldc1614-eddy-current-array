@@ -471,44 +471,70 @@ beyond the recording are marked invalid and shown in grey.
 
 ## Results
 
-### Single Channel Response
+### Part 1 — Straight-Line Notches of Increasing Depth
 
-Channel L3 was recorded as the probe crossed a 4 × 4 mm defect of 1.5 mm depth.
-Over clean metal the inductance sits at 3.4–3.5 µH. As the coil begins to overlap
-the defect the value rises sharply, peaking near **3.78 µH** when the coil is
-fully over the defect, then returns to baseline once it passes.
+The first test used the six calibration notches machined into the aluminium
+plate. All six are 70 mm long and 0.5 mm wide, and only the depth changes:
+0.1, 0.2, 0.4, 0.8, 1.2 and 1.5 mm, spaced 5 cm apart. The probe was moved in a
+single straight pass across all six.
 
-<!-- IMAGE: single-channel inductance trace over a 4x4 mm defect -->
-![Single channel response](docs/images/single_channel.png)
+<p align="center">
+  <img src="docs/images/specimen_notches.jpg" alt="Aluminium test plate with six calibration notches" width="700">
+</p>
+<p align="center"><em>Fig. 1: Test specimen with six straight-line notches of 70 mm length and 0.5 mm width, at depths from 0.1 mm to 1.5 mm.</em></p>
 
-### All Eight Channels
+#### Channel Response
 
-All eight channels recorded over the six calibration notches. Row 2 responds
-first, row 1 a short time later, and every coil within a row behaves almost
-identically. The rise in inductance grows clearly with notch depth.
+The measured inductance of all eight channels during the pass is shown below.
+Each notch produces a clear rise in inductance as the coils cross it.
 
-<!-- IMAGE: 8-channel traces over six notches, red = row 1, blue = row 2 -->
-![All channels](docs/images/all_channels.png)
+<p align="center">
+  <img src="docs/images/all_channels.png" alt="Inductance of all eight channels over six notches" width="750">
+</p>
+<p align="center"><em>Fig. 2: Measured inductance of all eight channels during a single pass over the six notches.</em></p>
 
-### Colour Map — Before and After Alignment
+The inductance rises rather than falls at a defect, which is the expected
+behaviour. Over intact metal, eddy currents circulate freely and their opposing
+magnetic field reduces the coil's effective inductance. A notch interrupts that
+current path, so the eddy currents weaken, the opposing field weakens with them,
+and the inductance moves back up towards its free-air value.
 
-Before alignment, six *pairs* of bands appear — each notch counted twice. The
-delay also grows through the scan, showing that the hand-driven speed was not
-constant. After alignment each notch produces one continuous band across all
-eight channels at the correct scan position.
+The size of that rise grows with notch depth — a deeper notch removes more
+material from the eddy current path, so the disruption is larger. All four coils
+within a row respond almost identically, confirming that the eight channels
+behave consistently.
 
-<!-- IMAGE: colour map before alignment -->
-![Before alignment](docs/images/map_before.png)
+#### Two-Dimensional Defect Map
 
-<!-- IMAGE: colour map after alignment -->
-![After alignment](docs/images/map_after.png)
+Combining the eight processed channels gives the final output of the device: a
+two-dimensional map of the scanned strip.
 
-<!-- IMAGE: specimen photo aligned with the colour map, six notches -->
-![Notches vs map](docs/images/notches_vs_map.png)
+<p align="center">
+  <img src="docs/images/notches_map.png" alt="Test specimen with the corresponding colour map of all eight channels" width="750">
+</p>
+<p align="center"><em>Fig. 3: Test specimen and the corresponding response map of all eight channels. Colour indicates the normalized response of each coil; dimensions in millimetres.</em></p>
 
-### Effect of Defect Depth
+The horizontal axis is the scan position and the vertical axis is the sensor
+channel, from L2 at the bottom to L9 at the top. The colour bar shows how far
+each reading sits from that channel's own baseline, measured in units of its own
+noise level. Because every channel is scaled by its own noise, all eight can be
+compared on a single colour scale despite having different baseline inductances.
 
-Three repeat scans of the same setup.
+Pale yellow is intact metal. A notch appears as a band running across the
+channels that passed over it, darkening as the response grows stronger. Grey
+marks samples where no valid measurement exists.
+
+Five bands are clearly visible, and their colour deepens steadily from left to
+right, matching the increasing notch depth: the 0.2 mm notch gives a light orange
+band while the 1.5 mm notch gives the darkest band of the scan. The 0.1 mm notch
+is present in the numerical data but too weak to separate from the background at
+this colour scale, placing it at the detection limit of the device in this
+configuration.
+
+#### Relation Between Response and Depth
+
+The scan was repeated three times. The mean inductance change for each notch is
+listed below.
 
 | Notch | Depth (mm) | Mean ΔL (µH) | Peak L (µH) |
 |---|---|---|---|
@@ -519,72 +545,108 @@ Three repeat scans of the same setup.
 | 5 | 1.2 | 0.201 | ≈ 3.77 |
 | 6 | 1.5 | 0.226 | ≈ 3.80 |
 
-The response rises quickly for shallow notches and more slowly as they deepen. A
-power law fits the measured points closely:
+The response increases for every step in depth, so the device distinguishes
+between notches of different depth rather than merely detecting their presence.
+The deepest notch gives a change more than four times larger than the shallowest.
+
+The increase is not linear. It is rapid for shallow notches and flattens as the
+notch deepens. A power law describes the measured points closely:
 
 ```
 ΔL = 0.184 · d^0.56          R² = 0.995
 ```
 
-The exponent of 0.56 is close to 0.5, meaning the inductance change grows roughly
-with the **square root** of notch depth.
+The exponent of 0.56 is close to 0.5, meaning the response grows roughly with the
+square root of notch depth.
 
-As a fraction of baseline inductance, the change runs from about **1.5 %** at
-0.1 mm to **6.3 %** at 1.5 mm — large enough for the LDC1614 to resolve directly,
-so no amplification stage is needed.
+<p align="center">
+  <img src="docs/images/depth_calibration.png" alt="Inductance change against notch depth with fitted power law" width="600">
+</p>
+<p align="center"><em>Fig. 4: Inductance change against notch depth, with the fitted power law and standard deviation error bars.</em></p>
 
-Scatter stays between 0.014 and 0.031 µH and does not grow with depth. Since the
-signal grows while the scatter does not, deeper notches are measured with higher
-confidence.
+Expressed against the baseline inductance, the change runs from about **1.5 %**
+at 0.1 mm to **6.3 %** at 1.5 mm. These are large enough for the LDC1614 to
+resolve directly, so no amplification stage is required in the design.
 
-> This is an **empirical calibration**. All six notches are 0.5 mm wide, so the
-> relation applies to that width, and it should not be extrapolated outside the
-> tested depth range.
+The scatter stays between 0.014 and 0.031 µH and does not grow with depth. Since
+the signal grows while the scatter does not, deeper notches are measured with
+higher confidence. The 0.1 mm notch gives 0.052 µH against a scatter of
+0.016 µH — about three times the noise, which is detectable but marginal.
 
-<!-- IMAGE: ΔL vs depth with fitted power law and error bars -->
-![Depth calibration](docs/images/depth_calibration.png)
-
-### Shape and Area
-
-A second scan crossed six defects of varying shape, area and depth.
-
-| Defect | Shape | Size | Depth (mm) | Result |
-|---|---|---|---|---|
-| 1 | Square | 1 × 1 mm | 1.0 | Not detected |
-| 2 | Square | 4 × 4 mm | 1.0 | Detected — L6, L7 |
-| 3 | Square | 6 × 6 mm | 1.0 | Detected — L4, L5 |
-| 4 | Straight line | 10 × 0.5 mm | 1.5 | Faint response |
-| 5 | Square | 4 × 4 mm | 1.5 | Detected — L8 |
-| 6 | Square | 6 × 6 mm | 1.5 | Detected — L3, strongest of the scan |
-
-For every detected defect the map reproduces **both** coordinates correctly: the
-position along the scan and the channel that responds matches the position across
-the plate width. This 2D localization is the core advantage of an array over a
-single coil.
-
-Response strength follows both area and depth — the 6 × 6 mm, 1.5 mm defect gives
-the darkest band of the scan.
-
-Defect 4 is as deep as Defect 6 but only produces a faint response, because a
-0.5 mm wide line removes very little material from the eddy current path compared
-to a several-millimetre square.
-
-<!-- IMAGE: specimen photo showing six defects and scan direction -->
-![Six defects](docs/images/six_defects_photo.jpg)
-
-<!-- IMAGE: colour map with shaded bands linking each defect to its position -->
-![Six defects mapped](docs/images/six_defects_map.png)
-
-### Detection Limits
-
-- **Smallest reliably detected area:** 4 × 4 mm
-- **1 × 1 mm defect:** not detected — its area is too small relative to the coil
-  to disturb enough of the eddy current path
-- **Shallowest detected depth:** 0.1 mm, at about 3× the measurement scatter,
-  placing it right at the limit in this configuration
+> This relation is an **empirical calibration**. All six notches are 0.5 mm wide,
+> so it applies to that width, and it should not be extrapolated beyond the depth
+> range tested.
 
 ---
 
+### Part 2 — Defects of Different Shape and Area
+
+The second test used six defects that vary in shape, area and depth rather than
+depth alone. The probe was moved in a single pass from Defect 1 through to
+Defect 6.
+
+<p align="center">
+  <img src="docs/images/specimen_shapes.jpg" alt="Test specimen with six defects of different shape and area" width="750">
+</p>
+<p align="center"><em>Fig. 5: Test specimen showing the six artificial defects and the scan direction.</em></p>
+
+| Defect | Shape | Size | Depth (mm) |
+|---|---|---|---|
+| 1 | Square | 1 × 1 mm | 1.0 |
+| 2 | Square | 4 × 4 mm | 1.0 |
+| 3 | Square | 6 × 6 mm | 1.0 |
+| 4 | Straight line | 10 mm long, 0.5 mm wide | 1.5 |
+| 5 | Square | 4 × 4 mm | 1.5 |
+| 6 | Square | 6 × 6 mm | 1.5 |
+
+#### Two-Dimensional Defect Map
+
+<p align="center">
+  <img src="docs/images/shapes_map.png" alt="Test specimen and corresponding colour map of all eight channels" width="750">
+</p>
+<p align="center"><em>Fig. 6: Test specimen and the corresponding response map of all eight channels. Shaded bands connect each defect to its position on the map. Dimensions in millimetres.</em></p>
+
+The map reproduces the actual defect layout in **two dimensions**. Defect 2 sits
+near 50 mm and appears on channels L6 and L7; Defect 3 near 118 mm on L4 and L5;
+Defect 5 near 235 mm on L8; Defect 6 near 285 mm on L3. In every case the
+position along the scan matches the defect's position on the plate, and the
+responding channel matches its position across the plate width.
+
+This is the central advantage of an array over a single coil. A single-coil probe
+reports only that something was found somewhere along its path; the array reports
+where along the scan **and** where across the width, in one pass.
+
+Response strength follows both area and depth. Defect 6 — the largest and deepest
+at 6 × 6 mm and 1.5 mm — gives the darkest band of the scan. Defect 3 has the
+same area but only 1 mm depth, and responds more weakly. Defect 2, at 4 × 4 mm
+and 1 mm deep, gives the weakest of the four clear responses. Both dimensions
+contribute, and the largest, deepest defect produces the strongest signal.
+
+#### Effect of Defect Width
+
+Defect 4 is a 10 mm straight line, as deep as Defect 6 at 1.5 mm, yet it produces
+only a faint response near 172 mm and 183 mm — far weaker than any of the square
+defects.
+
+The reason is its width. A 0.5 mm wide line removes very little material from the
+eddy current path compared with a square several millimetres on each side, so the
+disturbance to the circulating current is small. Depth alone does not determine
+the response; the area presented to the coil matters just as much.
+
+#### Detection Limit
+
+Defect 1, a 1 × 1 mm square, produces no visible band anywhere on the map. Its
+area is very small compared with the 10 mm coil, so only a tiny fraction of the
+eddy current path is disturbed and the resulting inductance change cannot be
+separated from the background.
+
+**Summary of limits in this configuration**
+
+- Smallest reliably detected area: **4 × 4 mm**
+- Below detection: **1 × 1 mm**
+- Shallowest detected depth: **0.1 mm**, at roughly three times the measurement
+  scatter
+- Scan width covered per pass: **55 mm**
 ## Cost
 
 **Prototype cost** — PCBWay quotation T-I4W1066372A, five-unit build, April 2026.
