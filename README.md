@@ -479,7 +479,7 @@ plate. All six are 70 mm long and 0.5 mm wide, and only the depth changes:
 single straight pass across all six.
 
 <p align="center">
-  <img src="Test_Metal/Test_Specimen_6_notches.png" alt="Aluminium test plate with six calibration notches" width="700">
+  <img src="Test_Metal/test_Specimen_6notches.png" alt="Aluminium test plate with six calibration notches" width="700">
 </p>
 <p align="center"><em>Fig. 1: Test specimen with six straight-line notches of 70 mm length and 0.5 mm width, at depths from 0.1 mm to 1.5 mm.</em></p>
 
