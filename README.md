@@ -510,7 +510,7 @@ Combining the eight processed channels gives the final output of the device: a
 two-dimensional map of the scanned strip.
 
 <p align="center">
-  <img src="docs/images/notches_map.png" alt="Test specimen with the corresponding colour map of all eight channels" width="750">
+  <img src="09_Results/Response_for_6_callibration_notches.png" width="750">
 </p>
 <p align="center"><em>Fig. 3: Test specimen and the corresponding response map of all eight channels. Colour indicates the normalized response of each coil; dimensions in millimetres.</em></p>
 
@@ -602,7 +602,7 @@ Defect 6.
 #### Two-Dimensional Defect Map
 
 <p align="center">
-  <img src="docs/images/shapes_map.png" alt="Test specimen and corresponding colour map of all eight channels" width="750">
+  <img src="09_Results/Response_for_6_defects.png" width="750">
 </p>
 <p align="center"><em>Fig. 6: Test specimen and the corresponding response map of all eight channels. Shaded bands connect each defect to its position on the map. Dimensions in millimetres.</em></p>
 
