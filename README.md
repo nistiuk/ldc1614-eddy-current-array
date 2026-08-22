@@ -602,7 +602,7 @@ Defect 6.
 #### Two-Dimensional Defect Map
 
 <p align="center">
-  <img src="09_Results/Response_for_6_defects.png" width="750">
+  <img src="09_Results/Response_for_6defects.png" width="750">
 </p>
 <p align="center"><em>Fig. 6: Test specimen and the corresponding response map of all eight channels. Shaded bands connect each defect to its position on the map. Dimensions in millimetres.</em></p>
 
