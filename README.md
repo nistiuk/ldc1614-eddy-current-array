@@ -560,7 +560,7 @@ The exponent of 0.56 is close to 0.5, meaning the response grows roughly with th
 square root of notch depth.
 
 <p align="center">
-  <img src="docs/images/depth_calibration.png" alt="Inductance change against notch depth with fitted power law" width="600">
+  <img src="09_Results/change of inductance vs depths.png" alt="Inductance change against notch depth with fitted power law" width="600">
 </p>
 <p align="center"><em>Fig. 4: Inductance change against notch depth, with the fitted power law and standard deviation error bars.</em></p>
 
