@@ -489,7 +489,7 @@ The measured inductance of all eight channels during the pass is shown below.
 Each notch produces a clear rise in inductance as the coils cross it.
 
 <p align="center">
-  <img src="Test_Metal/Test_Specimen_6_defects.png" alt="Inductance of all eight channels over six notches" width="750">
+  <img src="09_Results/inductance_response_for_6_callibration_notches.png" width="750">
 </p>
 <p align="center"><em>Fig. 2: Measured inductance of all eight channels during a single pass over the six notches.</em></p>
 
